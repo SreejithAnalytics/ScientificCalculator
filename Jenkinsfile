@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+                git credentialsId: 'Sreejith-Github-Credentials', url: 'https://github.com/SreejithAnalytics/ScientificCalculator.git', branch: 'main'
                 git 'https://github.com/SreejithAnalytics/ScientificCalculator.git'
             }
         }
