@@ -28,13 +28,19 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
-            when {
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') } // Runs only if tests pass
-            }
+        stage('Push Docker Images') {
             steps {
-                sh 'docker build -t your-dockerhub-username/scientific-calculator .'
-                sh 'docker push your-dockerhub-username/scientific-calculator'
+                script{
+                    withCredentials([usernamePassword(credentialsId:"DockerHub",passwordVariable:"dockerpass",usernameVariable:"dockerhubuser")])
+                    {
+
+                        sh "  docker login -u ${env.dockerhubuser} -p ${env.dockerpass} "
+                        echo 'login successful'
+                        sh "  docker tag spe-calc-mini-project ${env.dockerhubuser}/spe-calc-mini-project:latest"
+                        sh "  docker push ${env.dockerhubuser}/spe-calc-mini-project:latest"
+                    }
+                
+                 }
             }
         }
     }
