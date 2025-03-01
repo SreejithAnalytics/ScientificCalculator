@@ -1,11 +1,18 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Clone Repository') {
+    environment {
+        
+        GITHUB_REPO_URL = 'https://github.com/jainishParmar/spe-mini-project.git'
+
+    }
+
+     stages {
+        stage('Checkout') {
             steps {
-                git credentialsId: 'Sreejith-Github-Credentials', url: 'https://github.com/SreejithAnalytics/ScientificCalculator.git', branch: 'main'
-                git 'https://github.com/SreejithAnalytics/ScientificCalculator.git'
+                script {
+                    git branch: 'main', url: "${GITHUB_REPO_URL}"
+                }
             }
         }
 
