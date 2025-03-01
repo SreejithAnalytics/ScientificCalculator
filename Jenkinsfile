@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         
-        GITHUB_REPO_URL = 'https://github.com/jainishParmar/spe-mini-project.git'
+        GITHUB_REPO_URL = 'https://github.com/SreejithAnalytics/ScientificCalculator.git'
 
     }
 
