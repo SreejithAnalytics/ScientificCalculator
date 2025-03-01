@@ -27,6 +27,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+         stage('build image') {
+            steps {
+                sh 'docker build -t spe-calc-mini-project:latest .'
+            }
+        }
 
         stage('Push Docker Images') {
             steps {
