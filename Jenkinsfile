@@ -33,8 +33,7 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId:"DockerHub",passwordVariable:"dockerpass",usernameVariable:"dockerhubuser")])
                     {
-
-                       sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                        sh "  docker login -u ${env.dockerhubuser} -p ${env.dockerpass} "
                         echo 'login successful'
                         sh "  docker tag spe-calc-mini-project ${env.dockerhubuser}/spe-calc-mini-project:latest"
                         sh "  docker push ${env.dockerhubuser}/spe-calc-mini-project:latest"
